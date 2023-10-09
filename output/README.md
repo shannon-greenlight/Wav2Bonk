@@ -1,0 +1,1 @@
+This file ensures that the output folder exists in git.

@@ -1,0 +1,5 @@
+
+wavfile/*.wav
+output/*.txt
+build
+dist

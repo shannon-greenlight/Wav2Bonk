@@ -1,0 +1,1 @@
+This file ensures that the wavfile folder exists in git.
