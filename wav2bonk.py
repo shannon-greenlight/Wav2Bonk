@@ -32,35 +32,38 @@ def fileDialog():
   input_len = len(wavData.W)
   index = pd.date_range('1/1/2000', periods=input_len, freq='T')
 
-  if len(wavData.columns) == 2:
-      display_text.set('Stereo .wav file not supported!')
+  if input_len <= 2048:
+    if len(wavData.columns) == 2:
+        display_text.set('Stereo .wav file not supported!')
 
-  elif len(wavData.columns) == 1:
-      f = open(output_filename, "w")
-      f.write("w0,")
-      
-      wavData.index = index
-      sf = input_len / 128
-      wavData = (wavData.resample(str(sf)+'T').mean())
-      # print(index)
-      # print(wavData)
-      
-      i = 0
-      for x in wavData.W:
-        if i > 0:
-          f.write(",")
-        avg = (wavData.iloc[i].W)
-        avg = avg + 32768
-        avg = avg / 16
-        avg = int(avg)
-        f.write(str(avg))
-        i = i + 1
+    elif len(wavData.columns) == 1:
+        f = open(output_filename, "w")
+        f.write("w0,")
+        
+        wavData.index = index
+        sf = input_len / 128
+        wavData = (wavData.resample(str(sf)+'T').mean())
+        # print(index)
+        # print(wavData)
+        
+        i = 0
+        for x in wavData.W:
+          if i > 0:
+            f.write(",")
+          avg = (wavData.iloc[i].W)
+          avg = avg + 32768
+          avg = avg / 16
+          avg = int(avg)
+          f.write(str(avg))
+          i = i + 1
 
-      f.close()
-      display_text.set('Saved: ' + output_filename)
+        f.close()
+        display_text.set('Saved: ' + output_filename)
 
+    else:
+        display_text.set('Multi channel .wav file not supported!')
   else:
-      display_text.set('Multi channel .wav file not supported!')
+        display_text.set('Wav file > 2048 in length!')
 
 
 s = ttk.Style()
