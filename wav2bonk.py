@@ -12,8 +12,15 @@ window_width = 250
 root.geometry(f'{window_height}x{window_width}')
 root.configure(background='#aaaaaa')
 root.title('Greenface Labs Wav2Bonk')
+root.clipboard_clear()
 
+out_clip = ''
 input_filename = 'none'
+
+def write_data(data, outfile):
+  global out_clip
+  outfile.write(data)
+  out_clip += data
 
 def fileDialog():
   infile = askopenfile(mode='r', filetypes=[("Wav files", "*.wav")], initialdir='./wavfile')
@@ -38,7 +45,8 @@ def fileDialog():
 
     elif len(wavData.columns) == 1:
         f = open(output_filename, "w")
-        f.write("w0,")
+        #f.write("w0,")
+        write_data("w0,",f)
         
         wavData.index = index
         sf = input_len / 128
@@ -49,16 +57,20 @@ def fileDialog():
         i = 0
         for x in wavData.W:
           if i > 0:
-            f.write(",")
+            write_data(",",f)
+            #f.write(",")
           avg = (wavData.iloc[i].W)
           avg = avg + 32768
           avg = avg / 16
-          avg = int(avg)
-          f.write(str(avg))
+          avg = str(int(avg))
+          write_data(avg,f)
+          #f.write(avg)
           i = i + 1
+          #out_clip += avg
 
         f.close()
-        display_text.set('Saved: ' + output_filename)
+        display_text.set('Data copied to clipboard.\nSaved to: ' + output_filename)
+        root.clipboard_append(out_clip)
 
     else:
         display_text.set('Multi channel .wav file not supported!')
@@ -74,7 +86,7 @@ frm.pack(pady=20)
 
 display_text = tk.StringVar()
 display_text.set("Greenface Labs: .wav to Bonkulator")
-the_label = ttk.Label(frm, textvariable=display_text, font="verdana 16", background="#444444", foreground="white").pack()
+the_label = ttk.Label(frm, textvariable=display_text, font="verdana 16", background="#444444", foreground="white", anchor="center").pack()
 
 the_button = ttk.Button(frm, text="Select File", command=fileDialog).pack(pady=10)
 exit_button = ttk.Button(frm, text="Done", command=root.destroy).pack(pady=10)
