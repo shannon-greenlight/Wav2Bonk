@@ -8,3 +8,6 @@ python must be in the computer's PATH for this to work. wav2bonk.bat is provided
 
 Wav2bonk.py has a file browser that lets you select the input .wav file. Once selected, wav2bonk.py converts the contents to a text file with the same basename as the .wav file and saves that to the "out" folder as well as copying the data to the clipboard.
 Once the data is in the clipboard (either directly as described, or by copying the contents of the text file) you can paste it into the text area in the bonkulator control app while the Bonkulator is in the User Waverform function.
+
+The folder "wavfile" is the default path for the file browser. It contains a few example .wav files. You can put your favorite .wave files here if desired.
+
