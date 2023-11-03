@@ -1,5 +1,5 @@
 # Wav2Bonk
-GUI wav to Bonkulator waveform converter
+GUI wav to Bonkulator waveform converter.
 This program converts mono .wav files into a csv format text file that is compatible with the Greenface Labs Bonkulator.
 The length of the input .wav file is limited to 2048.
 Wav2bonk.py can be invoked from the command line by typing: python wav2bonk.py
