@@ -1,5 +1,4 @@
-
-wavfile/*.wav
-output/*.txt
 build
 dist
+*.spec
+*.zip
