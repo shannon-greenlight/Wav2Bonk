@@ -77,6 +77,9 @@ def process_wav_data(input_filename,wavData):
       os.makedirs(output_dir)
 
     with open(output_filename, "w") as f:
+        current_directory = os.getcwd()
+        current_directory = current_directory.replace("\\", "/")
+        print("Output file: " + current_directory + "/" + f.name)
         out_clip = ""
         write_data("w0,", f)
 
@@ -100,7 +103,7 @@ def fileDialog():
   infile = askopenfile(mode='r', filetypes=[("Wav files", "*.wav")], initialdir='./wavfile')
   if infile is not None:
     input_filename = infile.name
-    print(input_filename)
+    print("Input file: " + input_filename)
     _, data = wavfile.read(str(input_filename))
     # print(data)
 
