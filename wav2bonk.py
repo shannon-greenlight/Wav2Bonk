@@ -17,10 +17,31 @@ root.clipboard_clear()
 out_clip = ''
 input_filename = 'none'
 
+import platform
+platform_actions = {
+  'Darwin': 'Mac',
+  'Linux': 'Linux',
+  'Windows': 'Windows'
+}
+
+my_platform = platform_actions.get(platform.system())
+if my_platform:
+  print(f'Running on {my_platform}')
+
+# my_platform = "Win"
+
+# if platform.system() == 'Darwin':
+#     my_platform = "Mac"
+#     print('Running on Mac')
+
+# if platform.system() == 'Linux':
+#     my_platform = "Linux"
+#     print('Running on Linux')
+    
 if getattr(sys, 'frozen', False):
-    application_path = os.path.dirname(sys.executable)
-    os.chdir(application_path)
-    # os.chdir(sys._MEIPASS)
+  application_path = os.path.dirname(sys.executable)
+  os.chdir(application_path)
+  # os.chdir(sys._MEIPASS)
 
 def print_info():
   print("Path at terminal when executing this file")
@@ -97,7 +118,8 @@ def fileDialog():
     else:
           display_text2.set('Wav file > 2048 in length!')
 
-print_info()
+# print_info()
+
 s = ttk.Style()
 s.configure('Danger.TFrame', background='#99aaff', borderwidth=5, anchor="center")
 
@@ -128,12 +150,16 @@ the_button = ttk.Button(frm, text="Select File", command=fileDialog, style='TBut
 from tkinter import messagebox
 
 # Define the function that will be called when the button is pressed
+wavfile_folder = ""
+if my_platform == "Mac":
+  wavfile_folder = "_internal/"
+
 def show_help():
-  messagebox.showinfo("Help", """Wav2Bonk v2.0.0
+  messagebox.showinfo("Help", f"""Wav2Bonk v2.0.0
 
 Select a .wav file to convert to Bonkulator format.
 The .wav file must be 16 bit, mono, and less than 2049 values.
-Example .wav files are found in the 'wavfile' folder.
+Example .wav files are found in the {wavfile_folder}wavfile folder.
 
 The converted data will be copied to the clipboard.
 The converted data will also be saved to a text file in the output folder.
