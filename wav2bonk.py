@@ -28,6 +28,10 @@ def process_wav_data(input_filename,wavData):
     dirs = parts[0].split("/")
     output_filename = "output/" + dirs[-1] + ".txt"
 
+    output_dir = "output"
+    if not os.path.exists(output_dir):
+      os.makedirs(output_dir)
+
     with open(output_filename, "w") as f:
         out_clip = ""
         write_data("w0,", f)
