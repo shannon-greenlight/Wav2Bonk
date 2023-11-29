@@ -18,7 +18,9 @@ out_clip = ''
 input_filename = 'none'
 
 if getattr(sys, 'frozen', False):
-    os.chdir(sys._MEIPASS)
+    application_path = os.path.dirname(sys.executable)
+    os.chdir(application_path)
+    # os.chdir(sys._MEIPASS)
 
 def print_info():
   print("Path at terminal when executing this file")
