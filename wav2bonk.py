@@ -74,6 +74,7 @@ def fileDialog():
   infile = askopenfile(mode='r', filetypes=[("Wav files", "*.wav")], initialdir='./wavfile')
   if infile is not None:
     input_filename = infile.name
+    print(input_filename)
     _, data = wavfile.read(str(input_filename))
     # print(data)
 
