@@ -17,6 +17,9 @@ root.clipboard_clear()
 out_clip = ''
 input_filename = 'none'
 
+if getattr(sys, 'frozen', False):
+    os.chdir(sys._MEIPASS)
+
 def print_info():
   print("Path at terminal when executing this file")
   print(os.getcwd() + "\n")
