@@ -17,6 +17,24 @@ root.clipboard_clear()
 out_clip = ''
 input_filename = 'none'
 
+def print_info():
+  print("Path at terminal when executing this file")
+  print(os.getcwd() + "\n")
+
+  print("This file path, relative to os.getcwd()")
+  print(__file__ + "\n")
+
+  print("This file full path (following symlinks)")
+  full_path = os.path.realpath(__file__)
+  print(full_path + "\n")
+
+  print("This file directory and name")
+  path, filename = os.path.split(full_path)
+  print(path + ' --> ' + filename + "\n")
+
+  print("This file directory only")
+  print(os.path.dirname(full_path))
+
 def write_data(data, outfile):
   global out_clip
   outfile.write(data)
@@ -73,7 +91,7 @@ def fileDialog():
     else:
           display_text2.set('Wav file > 2048 in length!')
 
-
+print_info()
 s = ttk.Style()
 s.configure('Danger.TFrame', background='#99aaff', borderwidth=5, anchor="center")
 
